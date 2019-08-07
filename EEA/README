@@ -1,0 +1,32 @@
+main function:
+	Used to generate two random 4096 bits integers, compute their gcd using
+the implementation of extended Euclidean Algorithm, and compare it to the result of the corresponding GMP function.
+input:
+	None
+output:
+	Print on the screen 2 randomly generated 4096 bit integers, their gcd number obtained from the GMP tool 'mpz_gcd', the implemented extended Euclidean Algorithm, and the comparsion result.
+
+
+sub-functions:
+
+void EEA(mpz_t gcd, mpz_t a, mpz_t b)
+	The implementation of extended Euclidean Algorithm. Used to compute gcd(a,b). (s and t for as+bt=gcd(a,b) are also caculated as 's1' and 't1' in the implementation but not returned, since they aren't requested in this program.)
+input: 
+	an initialized mpz_t number 'gcd' used to store the calculated gcd number of 'a' and 'b'
+	an initialized mpz_t number 'a' storing the first generated 4096-bit number
+	an initialized mpz_t number 'b' storing the second generated 4096-bit number
+output:
+	None. The calculated result of gcd(a,b) is stored in the variable 'gcd'.
+
+
+void rand_num(mpz_t num1,mpz_t num2)
+	Used to genrate 2 random 4096-bit numbers.
+input: 
+	an initialized mpz_t number 'num1' used to store the first generated 4096-bit
+	an initialized mpz_t number 'num2' used to store the second generated 4096-bit
+output:
+	None. The generated 2 random 4096-bit numbers are stored in 'num1' and 'num2'.
+
+
+
+
