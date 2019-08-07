@@ -1,0 +1,45 @@
+main function:
+	Used to encryt the ciphertext with the given key using AES 
+input:
+	None 
+Notice that the plaintext and key are given in main.c and can be modified
+output:
+	print out ciphertext = E(K,plaintext)
+
+
+
+sub-functions:
+(given in layers.h)
+
+void generateRoundKey(unsigned char RoundKey[11][4][4], const unsigned char Key[4][4]);
+	generate 11 round keys
+input: 
+	unsigned char RoundKey[11][4][4]	only need to be initialized, used to store the round keys
+	const unsigned char Key[4][4]	the original key, also the round key for the first round
+
+void SubBytes(unsigned char a[4][4]);
+	the SubBytes layer
+input: 
+	unsigned char a[4][4]	the output of the layer before
+
+void ShiftRows(unsigned char a[4][4]);
+	the ShiftRows layer
+input: 
+	unsigned char a[4][4]	the output of the layer before
+
+void MixColumns(unsigned char a[4][4]);
+	the MixColumns layer
+input: 
+	unsigned char a[4][4]	the output of the layer before
+
+void AddRoundKey(unsigned char a[4][4], unsigned char RoundKey[4][4]);
+	the AddRoundKey layer
+input: 
+	unsigned char a[4][4]	the output of the layer before
+	unsigned char RoundKey[4][4]	the round key for the current round
+
+
+
+
+
+
