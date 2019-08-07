@@ -1,0 +1,39 @@
+functions:
+
+void RSA(int level, mpz_t m)
+	complete the whole RSA processes, including generating keys (p,q,n,e,d), encrypting, and decrypting
+input:
+	an integer 'level' representing the security level (must be selected among 80,112,128,192,and 256)
+	an mpz_t number 'm' which is initialized and stores the message to be encrypted
+output:
+	Print the process results on screen.
+
+
+key_p_q generate(int level)
+	takes as input a security level and generate p and q such that n is long enough to match the required security level
+input: 
+	an integer 'level' representing the security level (must be selected among 80,112,128,192,and 256)
+output: 
+	a key_p_q which is struted as {mpz_t p; mpz_t q; mpz_t n} where n is long enough to match the required security level
+
+
+void encrypt(mpz_t c, mpz_t e, mpz_t m, mpz_t n)
+	encrypt with c = m^e mod n
+input: 
+	mpz_t numbers c, e, m, and n which are all initialized
+output: 
+	None. The ciphertext is stored in c
+
+
+void decrypt(mpz_t m, mpz_t d, mpz_t c, mpz_t n)
+	encrypt with c = m^e mod n
+input: 
+	mpz_t numbers m, d, c and n which are all initialized
+output: 
+	None. The encrypted is stored in m
+
+
+
+
+
+
