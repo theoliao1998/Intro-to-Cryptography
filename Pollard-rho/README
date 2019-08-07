@@ -1,0 +1,18 @@
+main function:
+	Used to find a nontrivial factor of an input unsigned integer. It might fail.
+input:
+	Input an input unsigned integer 'number' to cin.
+output:
+	Print on the screen a nontrivial factor of 'number' if found, or "Failure" if not found.
+
+
+sub-function:
+
+bool pollard_rho(mpz_t d, const mpz_t n)
+	The implementation of pollard-rho algorithm. Used to find a nontrivial factor of an input unsigned integer. It might fail.
+input:
+	An initialized mpz_t number d, used to store the factor found.
+	An initialized mpz_t number n, storing the input unsigned integer.
+output:
+	A bool which is 1 if a nontrivial factor is found and stores in d, and 0 otherwise.
+
