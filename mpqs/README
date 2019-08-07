@@ -1,0 +1,116 @@
+Multiple Polynomial Quadratic Sieve
+
+Reference: Robert D. Silverman's paper https://pdfs.semanticscholar.org/4bc1/656a66f55e68c738a057d8b9e49d2308eb23.pdf
+
+u_type: 
+		the type used to store unsigned integers, which is defined as 'unsigned long int' in this program
+		the correctness of the program is limited to the choice of u_type, especially the type used to store the exponents 
+and operation numbers in Gaussian elimination.
+		A choice of 'unsigned int' can lead to overflow problems for large N. 
+		Another optional version using mpz_t is abandoned since it makes the program super slow.
+
+
+
+main function:
+	"""
+	generate a large integer N (which is randomly selected and can be modified, small factors like 2 and 3 are eliminated in advance)
+Print on the screen a nontrivious factor of N found by mpqs, or print fail if fail to find a nontrivious factor within the time limited 
+(time limit is initially set as 15s, and need to be modified for different length of N)
+	"""
+input:
+	Nothing.
+output:
+	Print on the screen a nontrivious factor of N or "Fail to find a nontrivious factor within the time limit."
+
+
+important sub-functions:
+
+static void getParameters(const mpz_t N, u_type & M, u_type & F, double & T)
+	"""
+	select parameters M, F, T according to the length of N (refer to Table 1 on p334 of Silverman's paper "The Multiple Polynomial 
+Quadratic Sieve" https://pdfs.semanticscholar.org/4bc1/656a66f55e68c738a057d8b9e49d2308eb23.pdf)
+	"""
+input:
+	initialized mpz_t number N
+	reference parameters u_type & M, u_type & F, double & T
+output:
+	Nothing. The selected values are stored in the input parameters M, F, T.
+
+
+
+other subfuntions like "getFB","getMultilier", "getTestValue", and "getFB" are also used to obtain parameters according to N, and are
+implemented refering to Silverman's paper, which are ommited here
+
+
+
+static u_type mpz_sqrtm(mpz_t x, const mpz_t n, const mpz_t p){
+	"""
+	implemented Tonelli-Shanks algorithm to compute x \equiv \sqrt{n} \bmod{p} where p is prime
+	"""
+input:
+	initialized mpz_t number x, n, p, p is prime
+output:
+	0 if n is not square, and 1 if n is square. The computed value of x is stored.
+
+
+
+static void sieve(const mpz_t A,const mpz_t B, const mpz_t kN, const u_type FB[], u_type F, long int SieveArray[],u_type M)
+	"""
+	sieve proper Q(x), actually this function calculates values stored in SieveArray used to compare with the testvalue obtained from 
+  "getTestValue". SieveArray can store 2*M + 1 values corresponding to the range of x
+	"""
+input:
+	initialized mpz_t number A, B, C as coefficients in Q(x) = Ax^2 + bx + c
+	initialized mpz_t number kN, which is N multiplied by the multiplier k obtained from "getMultiplier"
+	an array FB storing the selected base factors
+	an array SieveArray used to store the computed values used for evaluation and sieving
+	unsigned integers F, M
+output:
+	Nothing. The computed values used for evaluation and sieving are stored in SieveArray.
+
+
+
+
+static long int GaussianEliminate(u_type** exp_vectors,u_type** operations, u_type F, u_type size, bool LisOne)
+	"""
+	implemented Gaussian elimination used for matrix reduction
+	"""
+input:
+	initialized 2d array exp_vectors as the matrix, exponents are saved in corresponding places
+	initialized 2d array operations which correspond to each row in exp_vectors, and each column corresponds to a Q(x), the number of 
+this Q(x) multiplied is stored. Initially, in each row, only one value is 1 and all other values are 0, meaning that they are initially Q(x_i)^1
+	unsigned integer F as a parameter, exp_vectors has F columns
+	unsigned integer size as number of Q(x) involved, exp_vectors has size rows, operations has size rows and size columns
+	bool LisOne, used to show whether the unfactorized part L is 1, if L=1, we need overall even number of operations to have even number 
+of L multiplied together
+output:
+	an integer which is -1 if failed to reduce the matrix to 0 in GF2, otherwise it's the number index of the reduced row in exp_vectors
+	exp_vectors has been modified and maybe reduced in one rows
+	operations stores the corresponding number of Q(x) multiplied in each row
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
