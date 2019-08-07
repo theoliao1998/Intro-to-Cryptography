@@ -1,0 +1,23 @@
+main function:
+	Used to compare the speed of two stategies on large numbers. The large numbers used for test are randomly generated.
+input:
+	Nothing.
+output:
+	Print on the screen the respective time cost and the results of the two strategies for comparison.
+
+
+sub-functions:
+void ModularExponential(mpz_t power,const mpz_t m,const mpz_t d,const mpz_t n)
+	The implementation of original strategy.
+input:
+	Initialized mpz_t numbers power, m, d, n.
+output:
+	Nothing is output. Yet power is updated as m^d mod n.
+
+void RewritedModularExponential(mpz_t power,const mpz_t alpha,const mpz_t a, const mpz_t beta, const mpz_t b, const mpz_t n)
+	The implementation of the rewrited strategy.
+input:
+	Initialized mpz_t numbers power, alpha, a, beta, b, n.
+output:
+	Nothing is output. Yet power is updated as alpha^a*beta^b mod n.
+
