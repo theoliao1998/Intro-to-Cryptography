@@ -8,7 +8,6 @@ output:
 
 
 main sub-functions:
-(given in layers.h)
 
 void generateSBox(unsigned char S[16][16])
 	generate the S-Box in S
